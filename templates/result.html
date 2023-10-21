@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        /* CSS styling for the result page */
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333333;
+            text-align: center;
+        }
+
+        .result-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .disease-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333333;
+        }
+
+        .score {
+            margin-bottom: 5px;
+            color: #666666;
+        }
+
+        .description {
+            margin-bottom: 5px;
+            color: #666666;
+        }
+
+        .precautions {
+            margin-bottom: 5px;
+            color: #666666;
+        }
+
+        .treatment {
+            margin-bottom: 5px;
+            color: #666666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .alert {
+            background-color: #ffcc00;
+            color: #333333;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="alert">
+            This prediction is for informational purposes only. It is not a substitute for professional medical advice, diagnosis, or treatment. Please consult a healthcare professional for accurate diagnosis and appropriate treatment.
+        </div>
+        <h1>Top 3 Predicted Diseases with Probabilities</h1>
+        <ul>
+            {% for result in results %}
+            <li class="result-card">
+                <div class="disease-name"><strong>Disease:</strong> {{ result.disease }}</div>
+                <div class="score"><strong>Probability:</strong> {{ result.probability_range }}</div>
+                <div class="description"><strong>Description:</strong> {{ result.description }}</div>
+                <div><strong>Precautions:</strong></div>
+                <ul class="precautions">
+                    {% for precaution in result.precautions %}
+                    <li>{{ precaution }}</li>
+                    {% endfor %}
+                </ul>
+                <div><strong>Treatment:</strong> {{ result.treatment }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
